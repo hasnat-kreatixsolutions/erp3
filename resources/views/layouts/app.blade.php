@@ -330,6 +330,12 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ env('ASSET_URL') }}/assets/dist/js/pages/dashboard.js"></script>
 
+<!-- Datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+
 @yield('script')
 
 </body>

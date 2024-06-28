@@ -11,7 +11,7 @@
               <h3 class="card-title">Customer Create</h3>
             </div>
             <div class="card-body">
-                <form id="customerForm" method="POST" data-route="{{ route('customers.store') }}">
+                <form id="customerForm" data-route="{{ route('customers.store') }}" method="POST">
                   @csrf
                     <div class="row">
                       <div class="col-sm-4">

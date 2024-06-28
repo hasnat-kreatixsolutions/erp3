@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
+
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -16,6 +18,11 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        $user = User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
 
         // create permissions
         $permissions = [
@@ -37,5 +44,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // create roles and assign created permissions
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo($permissions);
+
+        $user->assignRole('admin');
     }
 }

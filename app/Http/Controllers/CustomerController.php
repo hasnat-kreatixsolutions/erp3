@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use Illuminate\Validation\ValidationException;
+use DataTables;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
@@ -13,15 +15,31 @@ class CustomerController extends Controller
      * Display a listing of the resource.
      */
 
-    public function __construct()
-    {
-        $this->middleware('role:admin'); // Check if the user has 'admin' role
-    }
+     public static function middleware(): array
+     {
+         return [
+             'permission:list-customer|create-customer|edit-customer|delete-customer' => ['only' => ['index', 'store']],
+             'permission:create-customer' => ['only' => ['create', 'store']],
+             'permission:edit-customer' => ['only' => ['edit', 'update']],
+             'permission:delete-customer' => ['only' => ['destroy']],
+         ];
+     }
 
-    public function index() {
-        $customers = Customer::all();
-        return response()->json($customers);
-    }
+     public function index(Request $request)
+     {
+         if ($request->ajax()) {
+             $data = Customer::latest()->get();
+             return DataTables::of($data)
+                ->addColumn('action', function($row){
+                    $btn = '<a href="javascript:void(0)" data-id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $btn .= ' <a href="javascript:void(0)" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $btn;
+                })
+                 ->rawColumns(['action'])
+                 ->make(true);
+         }
+         return view('pages.customers.index');
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -37,20 +55,27 @@ class CustomerController extends Controller
     public function store(StoreCustomerRequest $request)
     {
         try {
+
             $validatedData = $request->validated();
+
             $customer = Customer::create($validatedData);
-            dd($customer);
+
             return response()->json($customer, 201);
+
         } catch (ValidationException $e) {
+
             return response()->json([
                 'message' => 'Validation failed',
                 'errors' => $e->errors(),
             ], 422);
+
         } catch (\Exception $e) {
+
             return response()->json([
                 'message' => 'Failed to create customer',
                 'error' => $e->getMessage(),
             ], 500);
+
         }
     }
 
