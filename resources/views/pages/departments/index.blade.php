@@ -8,7 +8,7 @@
 
             <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Customers</h3>
+                  <h3 class="card-title">Departments</h3>
                 </div>
 
                 <div class="card-body">
@@ -17,11 +17,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Country</th>
-                                <th>City</th>
-                                <th>Telephone</th>
+                                <th>Code</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -45,15 +41,11 @@
       var dataTable = $('#table').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('customers.index') }}",
+          ajax: "{{ route('departments.index') }}",
           columns: [
               { data: 'id', name: 'id' },
               { data: 'name', name: 'name' },
-              { data: 'email', name: 'email' },
-              { data: 'address', name: 'address' },
-              { data: 'country', name: 'country' },
-              { data: 'city', name: 'city' },
-              { data: 'telephone', name: 'telephone' },
+              { data: 'code', name: 'code' },
               { data: 'action', name: 'action', orderable: false, searchable: false }
           ]
       });
@@ -62,20 +54,20 @@
       $('#table').on('click', '.delete', function(event) {
           event.preventDefault();
 
-          var customerId = $(this).data('id');
+          var departmentId = $(this).data('id');
           var row = $(this).closest('tr');
 
-          if (confirm("Are you sure you want to delete this customer?")) {
+          if (confirm("Are you sure you want to delete this department?")) {
               $.ajax({
-                  url: '/customers/' + customerId,
+                  url: '/departments/' + departmentId,
                   type: 'GET', // Use DELETE method for deletion
                   success: function(response) {
-                      alert('Customer deleted successfully');
+                      alert('Department deleted successfully');
                       dataTable.row(row).remove().draw(false); // Remove row from DataTable
                   },
                   error: function(xhr) {
                       console.error(xhr.responseText);
-                      alert('Failed to delete customer');
+                      alert('Failed to delete department');
                   }
               });
           }

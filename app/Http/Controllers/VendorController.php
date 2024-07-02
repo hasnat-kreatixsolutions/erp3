@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Customer\StoreCustomerRequest;
-use App\Http\Requests\Customer\UpdateCustomerRequest;
+use App\Http\Requests\Vendor\StoreVendorRequest;
+use App\Http\Requests\Vendor\UpdateVendorRequest;
 use Illuminate\Validation\ValidationException;
 use DataTables;
-use App\Models\Customer;
+use App\Models\Vendor;
 
-class CustomerController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,21 +18,21 @@ class CustomerController extends Controller
      public static function middleware(): array
      {
          return [
-             'permission:list-customer|create-customer|edit-customer|delete-customer' => ['only' => ['index', 'store']],
-             'permission:create-customer' => ['only' => ['create', 'store']],
-             'permission:edit-customer' => ['only' => ['edit', 'update']],
-             'permission:delete-customer' => ['only' => ['destroy']],
+             'permission:list-vendor|create-vendor|edit-vendor|delete-vendor' => ['only' => ['index', 'store']],
+             'permission:create-vendor' => ['only' => ['create', 'store']],
+             'permission:edit-vendor' => ['only' => ['edit', 'update']],
+             'permission:delete-vendor' => ['only' => ['destroy']],
          ];
      }
 
      public function index(Request $request)
      {
          if ($request->ajax()) {
-             $data = Customer::latest()->get();
+             $data = Vendor::latest()->get();
              return DataTables::of($data)
                 ->addColumn('action', function($row){
-                    $editUrl = route('customers.edit', $row->id);
-                    $deleteUrl = route('customers.destroy', $row->id);
+                    $editUrl = route('vendors.edit', $row->id);
+                    $deleteUrl = route('vendors.destroy', $row->id);
 
                     $btn = '<a href="'.$editUrl.'" class="edit btn btn-primary btn-sm">Edit</a>';
                     $btn .= ' <a href="'.$deleteUrl.'" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</a>';
@@ -41,7 +41,7 @@ class CustomerController extends Controller
                  ->rawColumns(['action'])
                  ->make(true);
          }
-         return view('pages.customers.index');
+         return view('pages.vendors.index');
      }
 
     /**
@@ -49,21 +49,21 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('pages.customers.create');
+        return view('pages.vendors.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCustomerRequest $request)
+    public function store(StoreVendorRequest $request)
     {
         try {
 
             $validatedData = $request->validated();
 
-            $customer = Customer::create($validatedData);
+            $vendor = Vendor::create($validatedData);
 
-            return response()->json($customer, 201);
+            return response()->json($vendor, 201);
 
         } catch (ValidationException $e) {
 
@@ -75,7 +75,7 @@ class CustomerController extends Controller
         } catch (\Exception $e) {
 
             return response()->json([
-                'message' => 'Failed to create customer',
+                'message' => 'Failed to create vendor',
                 'error' => $e->getMessage(),
             ], 500);
 
@@ -84,8 +84,8 @@ class CustomerController extends Controller
 
     // Display the specified resource.
     // public function show($id) {
-    //     $customer = Customer::findOrFail($id);
-    //     return response()->json($customer);
+    //     $vendor = Vendor::findOrFail($id);
+    //     return response()->json($vendor);
     // }
 
     /**
@@ -93,23 +93,23 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::findOrFail($id);
-        return view('pages.customers.edit',compact('customer'));
+        $vendor = Vendor::findOrFail($id);
+        return view('pages.vendors.edit',compact('vendor'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCustomerRequest $request, $id)
+    public function update(UpdateVendorRequest $request, $id)
     {
         try {
-            $customer = Customer::findOrFail($id);
+            $vendor = Vendor::findOrFail($id);
 
             $validatedData = $request->validated();
 
-            $customer->update($validatedData);
+            $vendor->update($validatedData);
 
-            return response()->json($customer, 200);
+            return response()->json($vendor, 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',
@@ -117,7 +117,7 @@ class CustomerController extends Controller
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to update customer',
+                'message' => 'Failed to update vendor',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -129,12 +129,12 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         try {
-            $customer = Customer::findOrFail($id);
-            $customer->delete();
+            $vendor = Vendor::findOrFail($id);
+            $vendor->delete();
     
-            return response()->json(['message' => 'Customer deleted successfully'], 200);
+            return response()->json(['message' => 'Vendor deleted successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to delete customer', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to delete vendor', 'error' => $e->getMessage()], 500);
         }
     }
     
