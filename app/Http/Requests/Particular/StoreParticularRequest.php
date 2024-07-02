@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Department;
+namespace App\Http\Requests\Particular;
+
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateDepartmentRequest extends FormRequest
+class StoreParticularRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,12 +20,10 @@ class UpdateDepartmentRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
-
         return [
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255',
         ];
     }
 }

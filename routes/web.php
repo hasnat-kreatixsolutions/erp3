@@ -31,6 +31,27 @@ Route::middleware(['auth'])->group(function () {
     Route::put('departments/{id}', [App\Http\Controllers\DepartmentController::class, 'update'])->name('departments.update');
     Route::get('departments/{id}', [App\Http\Controllers\DepartmentController::class, 'destroy'])->name('departments.destroy');
 
+    Route::get('manufacturers', [App\Http\Controllers\ManufacturerController::class, 'index'])->name('manufacturers.index');
+    Route::get('manufacturers/create', [App\Http\Controllers\ManufacturerController::class, 'create'])->name('manufacturers.create');
+    Route::post('manufacturers', [App\Http\Controllers\ManufacturerController::class, 'store'])->name('manufacturers.store');
+    Route::get('manufacturers/{id}/edit', [App\Http\Controllers\ManufacturerController::class, 'edit'])->name('manufacturers.edit');
+    Route::put('manufacturers/{id}', [App\Http\Controllers\ManufacturerController::class, 'update'])->name('manufacturers.update');
+    Route::get('manufacturers/{id}', [App\Http\Controllers\ManufacturerController::class, 'destroy'])->name('manufacturers.destroy');
+
+    Route::get('particulars', [App\Http\Controllers\ParticularController::class, 'index'])->name('particulars.index');
+    Route::get('particulars/create', [App\Http\Controllers\ParticularController::class, 'create'])->name('particulars.create');
+    Route::post('particulars', [App\Http\Controllers\ParticularController::class, 'store'])->name('particulars.store');
+    Route::get('particulars/{id}/edit', [App\Http\Controllers\ParticularController::class, 'edit'])->name('particulars.edit');
+    Route::put('particulars/{id}', [App\Http\Controllers\ParticularController::class, 'update'])->name('particulars.update');
+    Route::get('particulars/{id}', [App\Http\Controllers\ParticularController::class, 'destroy'])->name('particulars.destroy');
+
+    Route::get('machines', [App\Http\Controllers\MachineController::class, 'index'])->name('machines.index');
+    Route::get('machines/create', [App\Http\Controllers\MachineController::class, 'create'])->name('machines.create');
+    Route::post('machines', [App\Http\Controllers\MachineController::class, 'store'])->name('machines.store');
+    Route::get('machines/{id}/edit', [App\Http\Controllers\MachineController::class, 'edit'])->name('machines.edit');
+    Route::put('machines/{id}', [App\Http\Controllers\MachineController::class, 'update'])->name('machines.update');
+    Route::get('machines/{id}', [App\Http\Controllers\MachineController::class, 'destroy'])->name('machines.destroy');
+
 
     Route::get('/dashboard', function () {
         return view('dashboard');
