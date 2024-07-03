@@ -52,6 +52,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('machines/{id}', [App\Http\Controllers\MachineController::class, 'update'])->name('machines.update');
     Route::get('machines/{id}', [App\Http\Controllers\MachineController::class, 'destroy'])->name('machines.destroy');
 
+        Route::get('materials', [App\Http\Controllers\MaterialController::class, 'index'])->name('materials.index');
+    Route::get('materials/create', [App\Http\Controllers\MaterialController::class, 'create'])->name('materials.create');
+    Route::post('materials', [App\Http\Controllers\MaterialController::class, 'store'])->name('materials.store');
+    Route::get('materials/{id}/edit', [App\Http\Controllers\MaterialController::class, 'edit'])->name('materials.edit');
+    Route::put('materials/{id}', [App\Http\Controllers\MaterialController::class, 'update'])->name('materials.update');
+    Route::get('materials/{id}', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('materials.destroy');
+
 
     Route::get('/dashboard', function () {
         return view('dashboard');
