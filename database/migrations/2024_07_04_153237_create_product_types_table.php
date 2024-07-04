@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('product_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('particular_id');
             $table->string('name');
+            $table->unsignedBigInteger('material_id');
+            $table->unsignedBigInteger('particular_id');
             $table->timestamps();
 
-            // Add foreign key constraints
+            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
             $table->foreign('particular_id')->references('id')->on('particulars')->onDelete('cascade');
+
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('product_types');
     }
 };

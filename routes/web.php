@@ -9,7 +9,7 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::get('customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers.index');
     Route::get('customers/create', [App\Http\Controllers\CustomerController::class, 'create'])->name('customers.create');
     Route::post('customers', [App\Http\Controllers\CustomerController::class, 'store'])->name('customers.store');
@@ -52,12 +52,19 @@ Route::middleware(['auth'])->group(function () {
     Route::put('machines/{id}', [App\Http\Controllers\MachineController::class, 'update'])->name('machines.update');
     Route::get('machines/{id}', [App\Http\Controllers\MachineController::class, 'destroy'])->name('machines.destroy');
 
-        Route::get('materials', [App\Http\Controllers\MaterialController::class, 'index'])->name('materials.index');
+    Route::get('materials', [App\Http\Controllers\MaterialController::class, 'index'])->name('materials.index');
     Route::get('materials/create', [App\Http\Controllers\MaterialController::class, 'create'])->name('materials.create');
     Route::post('materials', [App\Http\Controllers\MaterialController::class, 'store'])->name('materials.store');
     Route::get('materials/{id}/edit', [App\Http\Controllers\MaterialController::class, 'edit'])->name('materials.edit');
     Route::put('materials/{id}', [App\Http\Controllers\MaterialController::class, 'update'])->name('materials.update');
     Route::get('materials/{id}', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('materials.destroy');
+
+    Route::get('product-types', [App\Http\Controllers\ProductTypeController::class, 'index'])->name('product-types.index');
+    Route::get('product-types/create', [App\Http\Controllers\ProductTypeController::class, 'create'])->name('product-types.create');
+    Route::post('product-types', [App\Http\Controllers\ProductTypeController::class, 'store'])->name('product-types.store');
+    Route::get('product-types/{id}/edit', [App\Http\Controllers\ProductTypeController::class, 'edit'])->name('product-types.edit');
+    Route::put('product-types/{id}', [App\Http\Controllers\ProductTypeController::class, 'update'])->name('product-types.update');
+    Route::get('product-types/{id}', [App\Http\Controllers\ProductTypeController::class, 'destroy'])->name('product-types.destroy');
 
 
     Route::get('/dashboard', function () {
@@ -66,4 +73,4 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
