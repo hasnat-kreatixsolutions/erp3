@@ -65,6 +65,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('product-types/{id}/edit', [App\Http\Controllers\ProductTypeController::class, 'edit'])->name('product-types.edit');
     Route::put('product-types/{id}', [App\Http\Controllers\ProductTypeController::class, 'update'])->name('product-types.update');
     Route::get('product-types/{id}', [App\Http\Controllers\ProductTypeController::class, 'destroy'])->name('product-types.destroy');
+    Route::get('/getParticulars/{material_id}', [App\Http\Controllers\ProductTypeController::class, 'getParticulars']);
+
+
+    Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
+    Route::get('products/create', [App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [App\Http\Controllers\ProductController::class, 'store'])->name('products.store');
+    Route::get('products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->name('products.edit');
+    Route::put('products/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('products.update');
+    Route::get('products/{id}', [App\Http\Controllers\ProductController::class, 'destroy'])->name('products.destroy');
+
+    Route::get('employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('employees/create', [App\Http\Controllers\EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('employees', [App\Http\Controllers\EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('employees/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::put('employees/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('employees.update');
+    Route::get('employees/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('employees.destroy');
 
 
     Route::get('/dashboard', function () {

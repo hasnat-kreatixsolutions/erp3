@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use DataTables;
 use App\Models\ProductType;
+use App\Models\Material;
 
 class ProductTypeController extends Controller
 {
@@ -142,6 +143,12 @@ class ProductTypeController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to delete product-type', 'error' => $e->getMessage()], 500);
         }
+    }
+
+    public function getParticulars($materialId)
+    {
+        $particulars = Material::with('particular')->where('id', $materialId)->get();
+        return response()->json($particulars);
     }
 
 }

@@ -23,6 +23,7 @@
                                         <div class="form-group">
                                             <label for="material">Material</label>
                                             <select id="material" name="material_id" class="form-control" required>
+                                            <option></option>
                                             @foreach (App\Models\Material::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
@@ -33,9 +34,10 @@
                                         <div class="form-group">
                                             <label for="particular">Particular</label>
                                             <select id="particular" name="particular_id" class="form-control" required>
-                                            @foreach (App\Models\Particular::all() as $item)
+                                                <option></option>
+                                            {{-- @foreach (App\Models\Particular::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
+                                            @endforeach --}}
                                             </select>
                                         </div>
                                     </div>
@@ -92,6 +94,35 @@
                     }
                 }
             });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#material').on('change', function () {
+            var materialId = $(this).val();
+            if (materialId) {
+                $.ajax({
+                    url: '/getParticulars/' + materialId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data)
+                        $('#particular').empty();
+                        $('#particular').append('<option value="">Select Particular</option>');
+                        $.each(data, function (key, value) {
+                            $('#particular').append('<option value="' + value.particular.id + '">' + value.particular.name + '</option>');
+                        });
+                    },
+                    error: function () {
+                        console.error('Error fetching particulars.');
+                    }
+                });
+            } else {
+                $('#particular').empty();
+                $('#particular').append('<option value="">Select Rarticular</option>');
+            }
         });
     });
 </script>
