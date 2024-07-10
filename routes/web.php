@@ -81,6 +81,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('employees/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit'])->name('employees.edit');
     Route::put('employees/{id}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('employees.update');
     Route::get('employees/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('employees.destroy');
+    Route::get('attachments/{id}/download', [App\Http\Controllers\EmployeeController::class, 'download'])->name('attachments.download');
+
+
+    Route::get('branches', [App\Http\Controllers\BranchController::class, 'index'])->name('branches.index');
+    Route::get('branches/create', [App\Http\Controllers\BranchController::class, 'create'])->name('branches.create');
+    Route::post('branches', [App\Http\Controllers\BranchController::class, 'store'])->name('branches.store');
+    Route::get('branches/{id}/edit', [App\Http\Controllers\BranchController::class, 'edit'])->name('branches.edit');
+    Route::put('branches/{id}', [App\Http\Controllers\BranchController::class, 'update'])->name('branches.update');
+    Route::get('branches/{id}', [App\Http\Controllers\BranchController::class, 'destroy'])->name('branches.destroy');
 
 
     Route::get('/dashboard', function () {

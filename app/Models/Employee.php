@@ -10,7 +10,20 @@ class Employee extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'contact_number', 'cnic_number', 'email', 'dob', 'shift', 'department_id', 'hiring_date', 'salary'
+        'name',
+        'father_name',
+        'passport_number',
+        'reporting_manager',
+        'employement_status',
+        'contact_number',
+        'cnic_number',
+        'email',
+        'dob',
+        'shift',
+        'department_id',
+        'branch_id',
+        'hiring_date',
+        'salary'
     ];
 
     public function attachments()

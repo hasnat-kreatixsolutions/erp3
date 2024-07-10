@@ -8,6 +8,7 @@ use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Employee\StoreEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Models\Employee;
+use App\Models\Attachment;
 
 class EmployeeController extends Controller
 {
@@ -89,6 +90,8 @@ class EmployeeController extends Controller
                 ]);
             }
 
+            
+            
             // Handle Documents
             if ($request->hasFile('documents')) {
                 foreach ($request->file('documents') as $document) {
@@ -127,7 +130,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::with('attachments')->findOrFail($id);
         return view('pages.employees.edit',compact('employee'));
     }
 
@@ -183,6 +186,7 @@ class EmployeeController extends Controller
                 ]);
             }
 
+
             // Handle Documents
             if ($request->hasFile('documents')) {
                 // Delete the old documents if exists
@@ -232,5 +236,14 @@ class EmployeeController extends Controller
             return response()->json(['message' => 'Failed to delete employee', 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function download($id)
+    {
+        $attachment = Attachment::findOrFail($id);
+        $pathToFile = storage_path('app/' . $attachment->file_path);
+
+        return response()->download($pathToFile, $attachment->file_name);
+    }
+
     
 }

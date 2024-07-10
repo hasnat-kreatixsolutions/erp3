@@ -22,6 +22,60 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
+                                            <label for="name">Father Name</label>
+                                            <input type="text" id="father_name" name="father_name" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name">Passport Number</label>
+                                            <input type="text" id="passport_number" name="passport_number" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="branch_id">Branch</label>
+                                            <select id="branch_id" name="branch_id" class="form-control" required>
+                                                @foreach (App\Models\Branch::all() as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="department_id">Department</label>
+                                            <select id="department_id" name="department_id" class="form-control" required>
+                                                @foreach (App\Models\Department::all() as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="reporting_manager">Reporting Manager</label>
+                                            <select id="reporting_manager" name="reporting_manager" class="form-control" required>
+                                                <option value="">option1</option>
+                                                <option value="">option2</option>
+                                                <option value="">option3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="employement_status">Employement Status</label>
+                                            <select id="employement_status" name="employement_status" class="form-control" required>
+                                                <option value="">option1</option>
+                                                <option value="">option2</option>
+                                                <option value="">option3</option>h
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
                                             <label for="contact_number">Contact Number</label>
                                             <input type="text" id="contact_number" name="contact_number"
                                                 class="form-control" required>
@@ -57,16 +111,6 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="department_id">Department</label>
-                                            <select id="department_id" name="department_id" class="form-control" required>
-                                                @foreach (App\Models\Department::all() as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
                                             <label for="hiring_date">Hiring Date</label>
                                             <input type="date" id="hiring_date" name="hiring_date" class="form-control"
                                                 required>
@@ -94,7 +138,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="documents">Document</label>
-                                            <input type="file" id="documents" name="documents" class="form-control">
+                                            <input type="file" id="documents" name="documents[]" class="form-control" multiple>
                                         </div>
                                     </div>
                                 </div>

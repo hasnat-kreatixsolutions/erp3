@@ -13,20 +13,28 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+        
+            $table->string('father_name');
+            $table->string('passport_number');
+            $table->unsignedBigInteger('branch_id'); // Change this line
+            $table->string('reporting_manager');
+            $table->string('employement_status');
+        
             $table->string('name');
             $table->string('contact_number');
             $table->string('cnic_number');
             $table->string('email')->unique();
             $table->date('dob');
             $table->string('shift');
-            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('department_id'); // Change this line
             $table->date('hiring_date');
             $table->decimal('salary', 10, 2);
             $table->timestamps();
-
+        
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
-
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
+        
     }
 
     /**
