@@ -10,7 +10,7 @@
                             <h3 class="card-title">Employee Edit</h3>
                         </div>
                         <div class="card-body">
-                            <form id="form" action="{{ route('employees.update', $employee->id) }}" method="POST">
+                            <form id="form" action="{{ route('employees.update', $employee->id) }}" method="POST" data-method="PUT">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -158,13 +158,13 @@
                             <h3 class="card-title">Files</h3>
                         </div>
                         <div class="card-body">
-                            <form id="form" action="{{ route('employees.update', $employee->id) }}" method="POST">
+                            <form id="form" action="{{ route('employees.update', $employee->id) }}" method="POST" data-method="PUT">
                                 @csrf
                                 <div class="row">
                                     <div class="col-6">
 
                                         <form id="form" method="POST" enctype="multipart/form-data"
-                                            action="{{ route('employees.update', $employee->id) }}">
+                                            action="{{ route('employees.update', $employee->id) }}" data-method="PUT">
                                             @csrf
                                             @method('PUT')
                                             <!-- Other form fields -->
@@ -207,42 +207,3 @@
     </section>
 @endsection
 
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#form').on('submit', function(e) {
-            e.preventDefault();
-
-            var formData = $(this).serialize();
-            var formAction = $(this).attr('action');
-
-            $.ajax({
-                url: formAction,
-                method: 'PUT',
-                data: formData,
-                success: function(response) {
-                    console.log('Employee updated successfully:', response);
-                    alert('Employee updated successfully!');
-                    // Optionally redirect or perform other actions after success
-                },
-                error: function(xhr) {
-                    if (xhr.status === 422) {
-                        const errors = xhr.responseJSON.errors;
-                        let errorMessage = 'Validation error:\n';
-                        for (const key in errors) {
-                            if (errors.hasOwnProperty(key)) {
-                                errorMessage += `${key}: ${errors[key].join(', ')}\n`;
-                            }
-                        }
-                        alert(errorMessage);
-                    } else {
-                        console.error('Error creating employee:', xhr.responseText);
-                        alert('Error creating employee. Please try again.');
-                    }
-                }
-            });
-        });
-    });
-</script>

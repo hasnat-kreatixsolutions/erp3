@@ -63,7 +63,9 @@ class VendorController extends Controller
 
             $vendor = Vendor::create($validatedData);
 
-            return response()->json($vendor, 201);
+            return response()->json([
+                'message' => 'Profile created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -81,12 +83,6 @@ class VendorController extends Controller
 
         }
     }
-
-    // Display the specified resource.
-    // public function show($id) {
-    //     $vendor = Vendor::findOrFail($id);
-    //     return response()->json($vendor);
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -109,7 +105,9 @@ class VendorController extends Controller
 
             $vendor->update($validatedData);
 
-            return response()->json($vendor, 200);
+            return response()->json([
+                'message' => 'Profile updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

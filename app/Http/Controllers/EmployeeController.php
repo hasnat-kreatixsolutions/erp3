@@ -106,7 +106,9 @@ class EmployeeController extends Controller
                 }
             }
 
-            return response()->json($employee, 201);
+            return response()->json([
+                'message' => 'Employee created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -208,7 +210,10 @@ class EmployeeController extends Controller
                 }
             }
 
-            return response()->json($employee, 200);
+
+            return response()->json([
+                'message' => 'Employee updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

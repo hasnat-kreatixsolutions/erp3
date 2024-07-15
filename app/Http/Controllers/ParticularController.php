@@ -63,7 +63,9 @@ class ParticularController extends Controller
 
             $particular = Particular::create($validatedData);
 
-            return response()->json($particular, 201);
+            return response()->json([
+                'message' => 'Manufacture created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -103,7 +105,10 @@ class ParticularController extends Controller
 
             $particular->update($validatedData);
 
-            return response()->json($particular, 200);
+
+            return response()->json([
+                'message' => 'Particular updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

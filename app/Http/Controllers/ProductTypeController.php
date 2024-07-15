@@ -76,7 +76,9 @@ class ProductTypeController extends Controller
 
             $product_type = ProductType::create($validatedData);
 
-            return response()->json($product_type, 201);
+            return response()->json([
+                'message' => 'ProductType created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -116,7 +118,9 @@ class ProductTypeController extends Controller
 
             $product_type->update($validatedData);
 
-            return response()->json($product_type, 200);
+            return response()->json([
+                'message' => 'ProductType updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

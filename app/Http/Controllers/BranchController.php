@@ -63,13 +63,14 @@ class BranchController extends Controller
 
             $branch = Branch::create($validatedData);
 
-            return response()->json($branch, 201);
+            return response()->json([
+                'message' => 'Branch created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $e->errors(),
             ], 422);
 
         } catch (\Exception $e) {
@@ -103,7 +104,11 @@ class BranchController extends Controller
 
             $branch->update($validatedData);
 
-            return response()->json($branch, 200);
+
+            return response()->json([
+                'message' => 'Branch updated successfully',
+            ], 200);
+            
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

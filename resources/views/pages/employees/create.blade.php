@@ -10,7 +10,8 @@
                             <h3 class="card-title">Employee Create</h3>
                         </div>
                         <div class="card-body">
-                            <form id="form" data-route="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
+                            <form id="form" action="{{ route('employees.store') }}" method="POST" data-method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -30,8 +31,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="name">Passport Number</label>
-                                            <input type="text" id="passport_number" name="passport_number" class="form-control"
-                                                required>
+                                            <input type="text" id="passport_number" name="passport_number"
+                                                class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -57,7 +58,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="reporting_manager">Reporting Manager</label>
-                                            <select id="reporting_manager" name="reporting_manager" class="form-control" required>
+                                            <select id="reporting_manager" name="reporting_manager" class="form-control"
+                                                required>
                                                 <option value="">option1</option>
                                                 <option value="">option2</option>
                                                 <option value="">option3</option>
@@ -67,7 +69,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="employement_status">Employement Status</label>
-                                            <select id="employement_status" name="employement_status" class="form-control" required>
+                                            <select id="employement_status" name="employement_status" class="form-control"
+                                                required>
                                                 <option value="">option1</option>
                                                 <option value="">option2</option>
                                                 <option value="">option3</option>h
@@ -112,8 +115,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="hiring_date">Hiring Date</label>
-                                            <input type="date" id="hiring_date" name="hiring_date" class="form-control"
-                                                required>
+                                            <input type="date" id="hiring_date" name="hiring_date"
+                                                class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -126,7 +129,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="profile_picture">Profile Picture</label>
-                                            <input type="file" id="profile_picture" name="profile_picture" class="form-control">
+                                            <input type="file" id="profile_picture" name="profile_picture"
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -138,7 +142,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="documents">Document</label>
-                                            <input type="file" id="documents" name="documents[]" class="form-control" multiple>
+                                            <input type="file" id="documents" name="documents[]" class="form-control"
+                                                multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -156,48 +161,3 @@
         </div>
     </section>
 @endsection
-
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#form').on('submit', function(event) {
-            event.preventDefault();
-
-            // Prepare form data
-            var formData = new FormData(this);
-
-            // Add extra data if needed (e.g., CSRF token)
-            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-
-            $.ajax({
-                url: $(this).data('route'), // URL to submit the form data
-                type: 'POST',
-                data: formData,
-                contentType: false, // Ensure Content-Type is false for FormData
-                processData: false, // Ensure processData is false for FormData
-                success: function(response) {
-                    console.log('Employee created successfully:', response);
-                    alert('Employee created successfully!');
-                    // Optionally redirect or perform other actions after success
-                },
-                error: function(xhr) {
-                    if (xhr.status === 422) {
-                        const errors = xhr.responseJSON.errors;
-                        let errorMessage = 'Validation error:\n';
-                        for (const key in errors) {
-                            if (errors.hasOwnProperty(key)) {
-                                errorMessage += `${key}: ${errors[key].join(', ')}\n`;
-                            }
-                        }
-                        alert(errorMessage);
-                    } else {
-                        console.error('Error creating employee:', xhr.responseText);
-                        alert('Error creating employee. Please try again.');
-                    }
-                }
-            });
-        });
-    });
-</script>

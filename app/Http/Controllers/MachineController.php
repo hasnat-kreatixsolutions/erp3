@@ -82,7 +82,10 @@ class MachineController extends Controller
     
             $machine = Machine::create($validatedData);
     
-            return response()->json($machine, 201);
+
+            return response()->json([
+                'message' => 'Machine created successfully',
+            ], 200);
     
         } catch (ValidationException $e) {
             return response()->json([
@@ -133,7 +136,11 @@ class MachineController extends Controller
     
             $machine->update($validatedData);
     
-            return response()->json($machine, 200);
+
+            return response()->json([
+                'message' => 'Machine updated successfully',
+            ], 200);
+
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

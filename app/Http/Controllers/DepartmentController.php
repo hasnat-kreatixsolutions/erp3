@@ -63,7 +63,9 @@ class DepartmentController extends Controller
 
             $department = Department::create($validatedData);
 
-            return response()->json($department, 201);
+            return response()->json([
+                'message' => 'Department created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -103,7 +105,10 @@ class DepartmentController extends Controller
 
             $department->update($validatedData);
 
-            return response()->json($department, 200);
+            return response()->json([
+                'message' => 'Department updated successfully',
+            ], 200);
+
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

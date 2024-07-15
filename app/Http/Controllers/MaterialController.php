@@ -67,7 +67,9 @@ class MaterialController extends Controller
 
             $material = Material::create($validatedData);
 
-            return response()->json($material, 201);
+            return response()->json([
+                'message' => 'Material created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -107,7 +109,10 @@ class MaterialController extends Controller
 
             $material->update($validatedData);
 
-            return response()->json($material, 200);
+
+            return response()->json([
+                'message' => 'Material updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

@@ -63,7 +63,10 @@ class CustomerController extends Controller
 
             $customer = Customer::create($validatedData);
 
-            return response()->json($customer, 201);
+
+            return response()->json([
+                'message' => 'Customer created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -82,11 +85,6 @@ class CustomerController extends Controller
         }
     }
 
-    // Display the specified resource.
-    // public function show($id) {
-    //     $customer = Customer::findOrFail($id);
-    //     return response()->json($customer);
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -109,7 +107,9 @@ class CustomerController extends Controller
 
             $customer->update($validatedData);
 
-            return response()->json($customer, 200);
+            return response()->json([
+                'message' => 'Customer updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

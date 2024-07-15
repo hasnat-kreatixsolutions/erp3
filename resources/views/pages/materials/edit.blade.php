@@ -11,7 +11,7 @@
               <h3 class="card-title">Material Edit</h3>
             </div>
             <div class="card-body">
-                <form id="form" action="{{ route('materials.update', $material->id) }}" method="POST">
+                <form id="form" action="{{ route('materials.update', $material->id) }}" method="POST" data-method="PUT">
                   @csrf
                     <div class="row">
                       <div class="col-sm-6">
@@ -42,45 +42,3 @@
   </section>
 
 @endsection
-
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#form').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = $(this).serialize();
-        var formAction = $(this).attr('action');
-        
-        $.ajax({
-            url: formAction,
-            method: 'PUT',
-            data: formData,
-            success: function(response) {
-                console.log('Material updated successfully:', response);
-                alert('Material updated successfully!');
-                // Optionally redirect or perform other actions after success
-            },
-            error: function(xhr) {
-                if (xhr.status === 422) {
-                    const errors = xhr.responseJSON.errors;
-                    let errorMessage = 'Validation error:\n';
-                    for (const key in errors) {
-                        if (errors.hasOwnProperty(key)) {
-                            errorMessage += `${key}: ${errors[key].join(', ')}\n`;
-                        }
-                    }
-                    alert(errorMessage);
-                } else {
-                    console.error('Error creating material:', xhr.responseText);
-                    alert('Error creating material. Please try again.');
-                }
-            }
-        });
-    });
-});
-
-
-</script>

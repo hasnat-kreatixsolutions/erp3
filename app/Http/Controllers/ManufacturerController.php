@@ -63,7 +63,9 @@ class ManufacturerController extends Controller
 
             $manufacturer = Manufacturer::create($validatedData);
 
-            return response()->json($manufacturer, 201);
+            return response()->json([
+                'message' => 'Manufacture created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -102,8 +104,10 @@ class ManufacturerController extends Controller
             $validatedData = $request->validated();
 
             $manufacturer->update($validatedData);
-
-            return response()->json($manufacturer, 200);
+            
+            return response()->json([
+                'message' => 'Manufacture updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',

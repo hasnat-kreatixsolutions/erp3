@@ -11,7 +11,7 @@
               <h3 class="card-title">Machine Edit</h3>
             </div>
             <div class="card-body">
-                <form id="form" action="{{ route('machines.update', $machine->id) }}" method="POST">
+                <form id="form" action="{{ route('machines.update', $machine->id) }}" method="POST" data-method="PUT">
                   @csrf
                   <div class="row">
                         
@@ -131,45 +131,3 @@
   </section>
 
 @endsection
-
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#form').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = $(this).serialize();
-        var formAction = $(this).attr('action');
-        
-        $.ajax({
-            url: formAction,
-            method: 'PUT',
-            data: formData,
-            success: function(response) {
-                console.log('Machine updated successfully:', response);
-                alert('Machine updated successfully!');
-                // Optionally redirect or perform other actions after success
-            },
-            error: function(xhr) {
-                if (xhr.status === 422) {
-                    const errors = xhr.responseJSON.errors;
-                    let errorMessage = 'Validation error:\n';
-                    for (const key in errors) {
-                        if (errors.hasOwnProperty(key)) {
-                            errorMessage += `${key}: ${errors[key].join(', ')}\n`;
-                        }
-                    }
-                    alert(errorMessage);
-                } else {
-                    console.error('Error creating machine:', xhr.responseText);
-                    alert('Error creating machine. Please try again.');
-                }
-            }
-        });
-    });
-});
-
-
-</script>

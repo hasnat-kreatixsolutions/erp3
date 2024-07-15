@@ -63,7 +63,9 @@ class ProductController extends Controller
 
             $product = Product::create($validatedData);
 
-            return response()->json($product, 201);
+            return response()->json([
+                'message' => 'Product created successfully',
+            ], 200);
 
         } catch (ValidationException $e) {
 
@@ -103,7 +105,9 @@ class ProductController extends Controller
 
             $product->update($validatedData);
 
-            return response()->json($product, 200);
+            return response()->json([
+                'message' => 'Product updated successfully',
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',
