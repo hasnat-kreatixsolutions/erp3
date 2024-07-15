@@ -3,6 +3,17 @@
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    {{-- <h1 class="m-0">Branch</h1> --}}
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a class="btn btn-secondary" href="{{ url('/employees') }}">View List</a></li>
+                        {{-- <li class="breadcrumb-item active">Create</li> --}}
+                    </ol>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-secondary">
@@ -60,9 +71,9 @@
                                             <label for="reporting_manager">Reporting Manager</label>
                                             <select id="reporting_manager" name="reporting_manager" class="form-control"
                                                 required>
-                                                <option value="">option1</option>
-                                                <option value="">option2</option>
-                                                <option value="">option3</option>
+                                                <option value="option1">option1</option>
+                                                <option value="option2">option2</option>
+                                                <option value="option3">option3</option>
                                             </select>
                                         </div>
                                     </div>
@@ -71,9 +82,9 @@
                                             <label for="employement_status">Employement Status</label>
                                             <select id="employement_status" name="employement_status" class="form-control"
                                                 required>
-                                                <option value="">option1</option>
-                                                <option value="">option2</option>
-                                                <option value="">option3</option>h
+                                                <option value="option1">option1</option>
+                                                <option value="option2">option2</option>
+                                                <option value="option3">option3</option>
                                             </select>
                                         </div>
                                     </div>

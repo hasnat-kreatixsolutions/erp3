@@ -30,7 +30,7 @@
                         <div class="inner">
                             <h3>{{ count(App\Models\Customer::get()) }}</h3>
 
-                            <p>Customer</p>
+                            <p>Customers</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -44,7 +44,7 @@
                         <div class="inner">
                             <h3>{{ count(App\Models\Vendor::get()) }}</h3>
 
-                            <p>Vendor</p>
+                            <p>Vendors</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -58,7 +58,7 @@
                         <div class="inner">
                             <h3>{{ count(App\Models\Employee::get()) }}</h3>
 
-                            <p>Employee</p>
+                            <p>Employees</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -72,7 +72,7 @@
                         <div class="inner">
                             <h3>{{ count(App\Models\Product::get()) }}</h3>
 
-                            <p>Product</p>
+                            <p>Products</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>

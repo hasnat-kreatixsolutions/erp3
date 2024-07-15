@@ -10,25 +10,31 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a class="btn btn-secondary" href="{{ url('/particulars') }}">View List</a></li>
+                <li class="breadcrumb-item"><a class="btn btn-secondary" href="{{ url('/permissions') }}">View List</a></li>
                 {{-- <li class="breadcrumb-item active">Create</li> --}}
             </ol>
         </div>
-      </div>
+    </div>
       <div class="row">
         <div class="col-md-12">
           <div class="card card-secondary">
             <div class="card-header">
-              <h3 class="card-title">Particular Edit</h3>
+              <h3 class="card-title">Permission Edit</h3>
             </div>
             <div class="card-body">
-                <form id="form" action="{{ route('particulars.update', $particular->id) }}" method="POST" data-method="PUT">
+                <form id="form" action="{{ route('permissions.update', $permission->id) }}" method="POST" data-method="PUT">
                   @csrf
                   <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" class="form-control" value="{{ $particular->name }}">
+                            <input type="text" id="name" name="name" class="form-control" value="{{ $permission->name }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="name">Guard Name</label>
+                            <input type="text" id="guard_name" name="guard_name" class="form-control" value="{{ $permission->guard_name }}">
                         </div>
                     </div>
                     <div class="col-sm-12">

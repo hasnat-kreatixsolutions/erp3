@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Validation\ValidationException;
-use App\Http\Requests\Manufacturer\StoreManufacturerRequest;
-use App\Http\Requests\Manufacturer\UpdateManufacturerRequest;
-use App\Models\Manufacturer;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
-class ManufacturerController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,21 +19,21 @@ class ManufacturerController extends Controller
      public static function middleware(): array
      {
          return [
-             'permission:list-manufacturer|create-manufacturer|edit-manufacturer|delete-manufacturer' => ['only' => ['index', 'store']],
-             'permission:create-manufacturer' => ['only' => ['create', 'store']],
-             'permission:edit-manufacturer' => ['only' => ['edit', 'update']],
-             'permission:delete-manufacturer' => ['only' => ['destroy']],
+             'permission:list-user|create-user|edit-user|delete-user' => ['only' => ['index', 'store']],
+             'permission:create-user' => ['only' => ['create', 'store']],
+             'permission:edit-user' => ['only' => ['edit', 'update']],
+             'permission:delete-user' => ['only' => ['destroy']],
          ];
      }
 
      public function index(Request $request)
      {
          if ($request->ajax()) {
-             $data = Manufacturer::latest()->get();
+             $data = User::latest()->get();
              return DataTables::of($data)
                 ->addColumn('action', function($row){
-                    $editUrl = route('manufacturers.edit', $row->id);
-                    $deleteUrl = route('manufacturers.destroy', $row->id);
+                    $editUrl = route('users.edit', $row->id);
+                    $deleteUrl = route('users.destroy', $row->id);
 
                     $btn = '<a href="'.$editUrl.'" class="edit btn btn-primary btn-sm">Edit</a>';
                     $btn .= ' <a href="'.$deleteUrl.'" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</a>';
@@ -41,7 +42,7 @@ class ManufacturerController extends Controller
                  ->rawColumns(['action'])
                  ->make(true);
          }
-         return view('pages.manufacturers.index');
+         return view('pages.users.index');
      }
 
     /**
@@ -49,65 +50,74 @@ class ManufacturerController extends Controller
      */
     public function create()
     {
-        return view('pages.manufacturers.create');
+        return view('pages.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreManufacturerRequest $request)
+    public function store(StoreUserRequest $request)
     {
         try {
-
             $validatedData = $request->validated();
-
-            $manufacturer = Manufacturer::create($validatedData);
-
+    
+            // Hash the password before creating the user
+            if (isset($validatedData['password'])) {
+                $validatedData['password'] = Hash::make($validatedData['password']);
+            }
+    
+            $user = User::create($validatedData);
+    
             return response()->json([
-                'message' => 'Manufacturer created successfully',
+                'message' => 'User created successfully',
             ], 200);
-
+    
         } catch (ValidationException $e) {
-
             return response()->json([
                 'message' => 'Validation failed',
                 'errors' => $e->errors(),
             ], 422);
-
+    
         } catch (\Exception $e) {
-
             return response()->json([
-                'message' => 'Failed to create manufacturer',
+                'message' => 'Failed to create user',
                 'error' => $e->getMessage(),
             ], 500);
-
+    
         }
     }
+    
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
-        $manufacturer = Manufacturer::findOrFail($id);
-        return view('pages.manufacturers.edit',compact('manufacturer'));
+        $user = User::findOrFail($id);
+        return view('pages.users.edit',compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateManufacturerRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         try {
-            $manufacturer = Manufacturer::findOrFail($id);
-
+            $user = User::findOrFail($id);
+    
             $validatedData = $request->validated();
-
-            $manufacturer->update($validatedData);
-            
+    
+            // Hash the password before updating the user if a new password is provided
+            if (isset($validatedData['password'])) {
+                $validatedData['password'] = Hash::make($validatedData['password']);
+            }
+    
+            $user->update($validatedData);
+    
             return response()->json([
-                'message' => 'Manufacturer updated successfully',
+                'message' => 'User updated successfully',
             ], 200);
+            
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation failed',
@@ -115,11 +125,12 @@ class ManufacturerController extends Controller
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to update manufacturer',
+                'message' => 'Failed to update user',
                 'error' => $e->getMessage(),
             ], 500);
         }
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -127,12 +138,12 @@ class ManufacturerController extends Controller
     public function destroy($id)
     {
         try {
-            $manufacturer = Manufacturer::findOrFail($id);
-            $manufacturer->delete();
+            $user = User::findOrFail($id);
+            $user->delete();
     
-            return response()->json(['message' => 'Manufacturer deleted successfully'], 200);
+            return response()->json(['message' => 'User deleted successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to delete manufacturer', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to delete user', 'error' => $e->getMessage()], 500);
         }
     }
     

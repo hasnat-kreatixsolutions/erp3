@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a class="btn btn-secondary" href="{{ url('/branches') }}">View List</a></li>
+                        <li class="breadcrumb-item"><a class="btn btn-secondary" href="{{ url('/roles') }}">View List</a></li>
                         {{-- <li class="breadcrumb-item active">Create</li> --}}
                     </ol>
                 </div>
@@ -18,11 +18,10 @@
                 <div class="col-md-12">
                     <div class="card card-secondary">
                         <div class="card-header">
-                            <h3 class="card-title">Branch Create</h3>
+                            <h3 class="card-title">Role Create</h3>
                         </div>
                         <div class="card-body">
-                            <form id="form" action="{{ route('branches.store') }}" method="POST" data-method="POST"
-                                data-method="POST">
+                            <form id="form" action="{{ route('roles.store') }}" method="POST" data-method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -33,21 +32,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="name">Email</label>
-                                            <input type="text" id="email" name="email" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="name">Number</label>
-                                            <input type="text" id="contact_number" name="contact_number"
-                                                class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="name">Address</label>
-                                            <input type="text" id="address" name="address" class="form-control">
+                                            <label for="name">Guard Name</label>
+                                            <input type="text" id="guard_name" name="guard_name" class="form-control">
                                         </div>
                                     </div>
                                 </div>

@@ -91,6 +91,27 @@ Route::middleware(['auth'])->group(function () {
     Route::put('branches/{id}', [App\Http\Controllers\BranchController::class, 'update'])->name('branches.update');
     Route::get('branches/{id}', [App\Http\Controllers\BranchController::class, 'destroy'])->name('branches.destroy');
 
+    Route::get('roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles.index');
+    Route::get('roles/create', [App\Http\Controllers\RoleController::class, 'create'])->name('roles.create');
+    Route::post('roles', [App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
+    Route::get('roles/{id}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('roles.edit');
+    Route::put('roles/{id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
+    Route::get('roles/{id}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('roles.destroy');
+
+    Route::get('permissions', [App\Http\Controllers\PermissionController::class, 'index'])->name('permissions.index');
+    Route::get('permissions/create', [App\Http\Controllers\PermissionController::class, 'create'])->name('permissions.create');
+    Route::post('permissions', [App\Http\Controllers\PermissionController::class, 'store'])->name('permissions.store');
+    Route::get('permissions/{id}/edit', [App\Http\Controllers\PermissionController::class, 'edit'])->name('permissions.edit');
+    Route::put('permissions/{id}', [App\Http\Controllers\PermissionController::class, 'update'])->name('permissions.update');
+    Route::get('permissions/{id}', [App\Http\Controllers\PermissionController::class, 'destroy'])->name('permissions.destroy');
+
+    Route::get('users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::get('users/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+    Route::post('users', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+    Route::get('users/{id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::put('users/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+    Route::get('users/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+
 
     Route::get('/dashboard', function () {
         return view('dashboard');

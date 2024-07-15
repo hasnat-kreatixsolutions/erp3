@@ -175,8 +175,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true"
-                        href="#" role="button">
+                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
+                        role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
@@ -225,12 +225,108 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{url('/dashboard')}}" class="nav-link">
+                            <a href="{{ url('/dashboard') }}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
                                 </p>
                             </a>
+                        </li>
+
+                        {{-- <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    User
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('users.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('users.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('roles.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Role
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('roles.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('roles.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('permissions.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Permission
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('permissions.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('permissions.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> --}}
+
+                        <li class="nav-item">
+                            <a href="{{ route('branches.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Branch
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('branches.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('branches.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="nav-item">
@@ -473,29 +569,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('branches.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Branch
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('branches.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('branches.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>View</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
 
                     </ul>
                 </nav>
